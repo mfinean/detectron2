@@ -295,10 +295,16 @@ class ShowAction(InferenceAction):
     def postexecute(cls: type, context: Dict[str, Any]):
         pass
 
+    # @classmethod
+    # def _get_out_fname(cls: type, entry_idx: int, fname_base: str):
+    #     base, ext = os.path.splitext(fname_base)
+    #     return base + ".{0:04d}".format(entry_idx) + ext
+
     @classmethod
     def _get_out_fname(cls: type, entry_idx: int, fname_base: str):
         base, ext = os.path.splitext(fname_base)
-        return base + ".{0:04d}".format(entry_idx) + ext
+        # Remove the entry index (which was causing the .0001 in filenames)
+        return base + ext
 
     @classmethod
     def create_context(cls: type, args: argparse.Namespace, cfg: CfgNode) -> Dict[str, Any]:
